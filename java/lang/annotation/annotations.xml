@@ -1,0 +1,5 @@
+<root>
+    <item name='java.lang.annotation.Repeatable'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>

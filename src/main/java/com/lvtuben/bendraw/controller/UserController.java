@@ -5,13 +5,16 @@ import com.lvtuben.bendraw.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Max;
 import java.util.List;
 
 
 @Controller
 @RequestMapping(value = "user/", method = RequestMethod.GET)
+@Validated
 public class UserController {
 
     @Autowired
@@ -19,7 +22,7 @@ public class UserController {
 
     @GetMapping("getUser/{sid}")
     @ResponseBody
-    public List<User> GetUser(@PathVariable Integer sid) {
+    public List<User> GetUser(@PathVariable @Max(value = 100,message = "最大100") Integer sid) {
         User user = new User();
         user.setSid(sid);
         return userService.getUser(user);
