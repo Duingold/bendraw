@@ -1,6 +1,8 @@
 package com.lvtuben.bendraw.controller;
 
+import com.lvtuben.bendraw.common.ApiResult;
 import com.lvtuben.bendraw.domain.User;
+import com.lvtuben.bendraw.request.TestTimeParamRequest;
 import com.lvtuben.bendraw.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import java.util.List;
 
@@ -48,5 +51,10 @@ public class UserController {
     public String findUser( ModelMap model) {
         model.addAttribute("user", userService.getUser(new User()));
         return "idex";
+    }
+    @ResponseBody
+    @PostMapping("/test")
+    public ApiResult testValidator(@RequestBody @Valid TestTimeParamRequest request){
+        return null;
     }
 }
