@@ -1,5 +1,7 @@
 package com.lvtuben.bendraw.common;
 
+import io.swagger.annotations.ApiModel;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
  * @date: 2019/6/12
  * @version: 1.0
  */
+@ApiModel
 public class ApiResult<T> implements Serializable {
 
 

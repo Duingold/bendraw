@@ -4,6 +4,10 @@ import com.lvtuben.bendraw.common.ApiResult;
 import com.lvtuben.bendraw.domain.User;
 import com.lvtuben.bendraw.request.TestTimeParamRequest;
 import com.lvtuben.bendraw.services.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,6 +22,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "user/", method = RequestMethod.GET)
 @Validated
+@Api(description = "用户控制器")
 public class UserController {
 
     @Autowired
@@ -38,7 +43,7 @@ public class UserController {
         return userService.deleteUser(sid);
     }
 
-    @GetMapping("finduser/{sid}")
+    @PostMapping("finduser/{sid}")
     public String findUser(@PathVariable Integer sid, ModelMap model) {
         User user = new User();
         user.setSid(sid);
@@ -52,9 +57,11 @@ public class UserController {
         model.addAttribute("user", userService.getUser(new User()));
         return "idex";
     }
-    @ResponseBody
+
     @PostMapping("/test")
-    public ApiResult testValidator(@RequestBody @Valid TestTimeParamRequest request){
+    @ApiOperation("测试自定义时间校验器")
+    @ApiResponse(code = 200,message = "响应数据",response = ApiResult.class)
+    public @ResponseBody ApiResult testValidator(@RequestBody @Valid @ApiParam TestTimeParamRequest request){
         return null;
     }
 }
