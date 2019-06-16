@@ -2,11 +2,9 @@ package com.lvtuben.bendraw.mapper;
 
 import com.lvtuben.bendraw.domain.User;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface UserMapper {
 
     User getUser(Integer sid);

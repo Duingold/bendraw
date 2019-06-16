@@ -19,8 +19,7 @@ import javax.validation.constraints.Max;
 import java.util.List;
 
 
-@Controller
-@RequestMapping(value = "user/", method = RequestMethod.GET)
+@Controller("user/")
 @Validated
 @Api(description = "用户控制器")
 public class UserController {
@@ -43,7 +42,7 @@ public class UserController {
         return userService.deleteUser(sid);
     }
 
-    @PostMapping("finduser/{sid}")
+    @PostMapping(value = "finduser/{sid}")
     public String findUser(@PathVariable Integer sid, ModelMap model) {
         User user = new User();
         user.setSid(sid);
@@ -52,7 +51,7 @@ public class UserController {
         return "index";
     }
 
-    @RequestMapping("userlist")
+    @GetMapping("userlist")
     public String findUser( ModelMap model) {
         model.addAttribute("user", userService.getUser(new User()));
         return "idex";
@@ -62,6 +61,7 @@ public class UserController {
     @ApiOperation("测试自定义时间校验器")
     @ApiResponse(code = 200,message = "响应数据",response = ApiResult.class)
     public @ResponseBody ApiResult testValidator(@RequestBody @Valid @ApiParam TestTimeParamRequest request){
-        return null;
+
+        return new ApiResult("200", "成功");
     }
 }
